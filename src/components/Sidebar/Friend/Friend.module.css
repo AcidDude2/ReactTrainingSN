@@ -1,0 +1,13 @@
+.ava img {
+    height: 50px;
+    width: 50px;
+    border-radius: 30px;
+    padding-left: 1px;
+    margin-left: 5px;
+  }
+
+  .ava p{
+    margin-top: -5px;
+    margin-left: 5px;
+    text-align: center;
+  }

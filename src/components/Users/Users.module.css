@@ -1,0 +1,18 @@
+.userPhoto {
+    width: 100px;
+    height: 100px;
+    border-radius: 60px;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.pageList span {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+button {
+    cursor: pointer;
+}

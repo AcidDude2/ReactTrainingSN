@@ -1,0 +1,30 @@
+.nav {
+  grid-area: n;
+  background-color: burlywood;
+  padding: 20px;
+}
+
+.item {
+  color: white;
+  text-decoration: none;
+}
+
+.active {
+  color: gold;
+  text-decoration: none;
+}
+
+.friendList {
+  display: inline;
+}
+
+/* .nav img {
+  height: 50px;
+  width: 50px;
+  border-radius: 30px;
+  padding-left: 1px;
+}
+
+.friends {
+  padding: 20px;
+} */

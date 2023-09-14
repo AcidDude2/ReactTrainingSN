@@ -1,0 +1,27 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    padding: 10px;
+}
+
+.dialogsMembers {
+    padding: 10px;
+}
+
+.dialog {
+    color: white;
+    text-decoration: none;
+}
+
+.active {
+    color: darkblue;
+    text-decoration: none;
+}
+
+.messages {
+    padding: 10px;
+}
+
+.messages button {
+    margin-top: 10px;
+}

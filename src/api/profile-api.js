@@ -2,10 +2,13 @@ import { instance } from "./instance";
 
 
 export const profileAPI = {
-    getProfile(userId = 2) {
-        return instance.get(`profile/` + userId)
-            .then(response => {
-                return response.data;
-            })
+    getProfile(userId) {
+        return instance.get(`profile/` + userId);
+    },
+    getStatus(userId) {
+        return instance.get(`profile/status/` + userId);
+    },
+    updateStatus(status) {
+        return instance.put(`profile/status`, {status: status});
     }
-}
+};

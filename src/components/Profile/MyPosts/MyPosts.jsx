@@ -1,17 +1,13 @@
 import React from "react";
 import styles from "../MyPosts/MyPosts.module.css";
 import Post from "./Post/Post";
+import { AddNewPostReduxForm } from "./AddPostForm/AddPostForm";
+
 
 const MyPosts = (props) => {
-  let newPostElement = React.createRef();
 
-  let onAddPost = () => {
-    props.addPost();
-  }
-
-  let onPostChange = () => {
-    let text = newPostElement.current.value;
-    props.updateNewPostText(text);
+  let onAddPost = (values) => {
+    props.addPost(values.newPostText);
   }
 
   let postsElement = props.posts.map(p => <Post message={p.message} likes_counter={p.likesCount} />)
@@ -20,10 +16,7 @@ const MyPosts = (props) => {
     <div className={styles.postsBlock}>
       <h3>My posts</h3>
       <div>
-        <textarea onChange={ onPostChange } ref={newPostElement} value={props.newPostText}/>
-      </div>
-      <div>
-        <button onClick={onAddPost}>Add Post</button>
+        <AddNewPostReduxForm onSubmit={onAddPost} />
       </div>
       <div className={styles.posts}>
         {postsElement}
@@ -31,5 +24,6 @@ const MyPosts = (props) => {
     </div>
   )
 }
+
 
 export default MyPosts;

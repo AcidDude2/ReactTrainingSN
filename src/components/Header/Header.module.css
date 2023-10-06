@@ -15,3 +15,9 @@
 .loginBlock a {
     color: white;
 }
+
+.loginBlock img {
+    width: 30px;
+    height: 30px;
+    border-radius: 18px;
+}

@@ -1,0 +1,21 @@
+.paginator {
+    margin: 10px;
+    cursor: pointer;
+}
+
+.pageNumber {
+    padding: 2px;
+}
+
+.pageNumber.selectedPage {
+    font-weight: bold;
+}
+
+.pageList span {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+button {
+    cursor: pointer;
+}

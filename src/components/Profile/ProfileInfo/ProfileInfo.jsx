@@ -2,26 +2,27 @@ import React from "react";
 import styles from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import profilePhoto from "../../../assets/images/user.png"
-import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import { ProfileStatusWithHooks } from "./ProfileStatus/ProfileStatusWithHooks";
 
-const ProfileInfo = (props) => {
-  // console.log(props.profile)
-  if (!props.profile) {
+const ProfileInfo = ({profile, status, updateStatus}) => {
+  if (!profile) {
     return <Preloader />
   }
   return (
     <div>
-      <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiSL9x1FiCIGJLFxEAKOSNf7nHlNzKgobWk2ch1UU7UWX5VSdH8JikVt3ZvhbEyZi1aG4&usqp=CAU' alt='content_picture' height={400} width={800} />
+      <img src="https://bogatyr.club/uploads/posts/2023-01/thumbs/1674852902_bogatyr-club-p-zvezdnoe-nebo-fon-fon-vkontakte-2.jpg" alt="content_picture" height={360} width={985} />
       <div className={styles.descriptionBlock}>
-      <img src={props.profile.photos.large != null ? props.profile.photos.large : profilePhoto} className={styles.profilePhoto} />
-      <ProfileStatus status = {props.status} updateStatus = {props.updateStatus} />
+        <img src={profile.photos.large != null ? profile.photos.large : profilePhoto} className={styles.profilePhoto} />
         <div>
-            {props.profile.fullName}
+          {profile.fullName}
+        </div>
+        <div>
+          <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
         </div>
       </div>
-        <div>
-            {props.profile.aboutMe}
-        </div>
+      <div>
+        {profile.aboutMe}
+      </div>
     </div>
   )
 }

@@ -5,34 +5,29 @@ import { maxLengthCreator, required } from "../utils/validators/validators";
 import { connect } from "react-redux";
 import { login } from "../../redux/auth-reducer";
 import { Navigate } from "react-router-dom";
-import style from "./../common/FormsControls/FormsControls.module.css"
+import style from "./../common/FormsControls/FormsControls.module.css";
+import { createField } from "../common/FormsControls/FormsControls";
 
 
-const maxLength20 = maxLengthCreator(20)
+const maxLength40 = maxLengthCreator(40);
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit, error }) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={"Email"} name={"email"} component={FormControl} child={"input"} validate={[required, maxLength20]} />
-            </div>
-            <div>
-                <Field placeholder={"Password"} name={"password"} type={"password"} component={FormControl} child={"input"} validate={[required, maxLength20]} />
-            </div>
-            <div>
-                <Field name={"rememberMe"} component={FormControl} child={"input"} type={"checkbox"} /> Remember me
-            </div>
-            {props.error && <div className={style.formSummaryError}>
-                {props.error}
+        <form onSubmit={handleSubmit}>
+            {createField("Email", "email", "input", [required, maxLength40], FormControl)}
+            {createField("Password", "password", "input", [required], FormControl, { type: "password" })}
+            {createField(null, "rememberMe", "input", null, FormControl, { type: "checkbox" }, "Remember me")}
+            {error && <div className={style.formSummaryError}>
+                {error}
             </div>}
             <div>
                 <button>Login</button>
             </div>
         </form>
     )
-}
+};
 
-const LoginReduxForm = reduxForm({ form: "login" })(LoginForm)
+const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
 
 const Login = (props) => {
     const onSubmit = (formData) => {
@@ -47,7 +42,7 @@ const Login = (props) => {
         <h1>Login</h1>
         <LoginReduxForm onSubmit={onSubmit} />
     </div>
-}
+};
 
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth

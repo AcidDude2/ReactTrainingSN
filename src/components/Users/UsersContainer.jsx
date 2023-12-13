@@ -9,12 +9,13 @@ import Preloader from "../common/Preloader/Preloader";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
-        // console.log(this.props.users.splice(-3, this.props.users.length))
+        const {currentPage, pageSize} = this.props;
+        this.props.requestUsers(currentPage, pageSize);
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props;
+        this.props.requestUsers(pageNumber, pageSize);
     }
 
     render() {
@@ -33,18 +34,7 @@ class UsersContainer extends React.Component {
         }
         </>)
     }
-}
-
-// let mapStateToProps = (state) => {
-//     return {
-//         users: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// };
+};
 
 let mapStateToProps = (state) => {
     return {
@@ -56,7 +46,6 @@ let mapStateToProps = (state) => {
         followingInProgress: getFollowingInProgress(state)
     }
 };
-
 
 
 export default connect(mapStateToProps, {follow, unfollow, requestUsers})(UsersContainer);

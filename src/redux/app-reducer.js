@@ -1,10 +1,10 @@
 import { getAuthUserData } from "./auth-reducer";
 
-const INITIALIZATION_SUCCESS = 'INITIALIZATION_SUCCESS';
+const INITIALIZATION_SUCCESS = "SN/app-reducer/INITIALIZATION_SUCCESS";
 
 let initialState = {
     initialized: false
-}
+};
 
 const appReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -16,7 +16,7 @@ const appReducer = (state = initialState, action) => {
         default:
             return state;
     }
-}
+};
 
 export const initialisationSuccess = () => ({ type: INITIALIZATION_SUCCESS });
 
@@ -26,7 +26,7 @@ export const initializeApp = () => (dispatch) => {
         .then(() => {
             dispatch(initialisationSuccess())
         });
-}
+};
 
 
 export default appReducer;

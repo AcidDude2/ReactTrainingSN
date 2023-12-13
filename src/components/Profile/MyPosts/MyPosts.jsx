@@ -4,13 +4,14 @@ import Post from "./Post/Post";
 import { AddNewPostReduxForm } from "./AddPostForm/AddPostForm";
 
 
-const MyPosts = (props) => {
+const MyPosts = React.memo((props) => {
+  // console.log("RENDERED")
 
   let onAddPost = (values) => {
     props.addPost(values.newPostText);
   }
 
-  let postsElement = props.posts.map(p => <Post message={p.message} likes_counter={p.likesCount} />)
+  let postsElement = [...props.posts].reverse().map(p => <Post message={p.message} likes_counter={p.likesCount} />)
 
   return (
     <div className={styles.postsBlock}>
@@ -23,7 +24,7 @@ const MyPosts = (props) => {
       </div>
     </div>
   )
-}
+});
 
 
 export default MyPosts;

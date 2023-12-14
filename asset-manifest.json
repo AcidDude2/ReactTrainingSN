@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ReactTrainingSN/static/css/main.9d4bd72a.css",
-    "main.js": "/ReactTrainingSN/static/js/main.6b97e3d7.js",
+    "main.js": "/ReactTrainingSN/static/js/main.e664fdb6.js",
     "static/css/114.742c6a82.chunk.css": "/ReactTrainingSN/static/css/114.742c6a82.chunk.css",
     "static/js/114.fc4ada48.chunk.js": "/ReactTrainingSN/static/js/114.fc4ada48.chunk.js",
     "static/css/318.9676b463.chunk.css": "/ReactTrainingSN/static/css/318.9676b463.chunk.css",
@@ -20,7 +20,7 @@
     "static/media/user.png": "/ReactTrainingSN/static/media/user.25558adea84bbfb81666.png",
     "index.html": "/ReactTrainingSN/index.html",
     "main.9d4bd72a.css.map": "/ReactTrainingSN/static/css/main.9d4bd72a.css.map",
-    "main.6b97e3d7.js.map": "/ReactTrainingSN/static/js/main.6b97e3d7.js.map",
+    "main.e664fdb6.js.map": "/ReactTrainingSN/static/js/main.e664fdb6.js.map",
     "114.742c6a82.chunk.css.map": "/ReactTrainingSN/static/css/114.742c6a82.chunk.css.map",
     "114.fc4ada48.chunk.js.map": "/ReactTrainingSN/static/js/114.fc4ada48.chunk.js.map",
     "318.9676b463.chunk.css.map": "/ReactTrainingSN/static/css/318.9676b463.chunk.css.map",
@@ -37,6 +37,6 @@
   },
   "entrypoints": [
     "static/css/main.9d4bd72a.css",
-    "static/js/main.6b97e3d7.js"
+    "static/js/main.e664fdb6.js"
   ]
 }

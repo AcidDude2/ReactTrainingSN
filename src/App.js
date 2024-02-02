@@ -1,8 +1,8 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Provider, connect } from "react-redux";
 import { initializeApp } from "./redux/app-reducer";
 import GlobalPreloader from "./components/common/GlobalPreloader/GlobalPreloader";
@@ -10,6 +10,7 @@ import { compose } from "redux";
 import { withRouter } from "./hoc/withRouter";
 import store from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
+import SystemMessageWindowContainer from "./components/common/SystemMessageWindow/SystemMessageWindow";
 
 
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
@@ -19,41 +20,39 @@ const Music = React.lazy(() => import("./components/Music/Music"));
 const Settings = React.lazy(() => import("./components/Settings/Settings"));
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
 const Login = React.lazy(() => import("./components/Login/Login"));
+const HomePage = React.lazy(() => import("./components/HomePage/HomePage"));
 
 
-class App extends React.Component {
+const App = (props) => {
+  useEffect(() => { props.initializeApp() })
 
-  componentDidMount() {
-    this.props.initializeApp();
-  };
-
-  render() {
-
-    if (!this.props.initialized) {
-      return <GlobalPreloader />
-    }
-
-    return (
-      <div className="app-wrapper">
-        <HeaderContainer />
-        <Navbar />
-        <div className="app-wrapper-content">
-          <Suspense fallback={<div><Preloader /></div>}>
-            <Routes>
-              <Route path="/profile/:userId?" element={<ProfileContainer />} />
-              <Route path="/dialogs/*" element={<DialogsContainer />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/music" element={<Music />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/users" element={<UsersContainer />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-          </Suspense>
-        </div>
-      </div>
-    );
+  if (!props.initialized) {
+    return <GlobalPreloader />
   }
-};
+
+  return (
+    <div className="app-wrapper">
+      <HeaderContainer />
+      <Navbar />
+      <div className="app-wrapper-content">
+        <Suspense fallback={<div><Preloader /></div>}>
+          <Routes>
+            <Route exact path="/" element={props.initialized ? <ProfileContainer /> : <Login />} />
+            <Route path="/profile/:userId?" element={<ProfileContainer />} />
+            <Route path="/dialogs/*" element={<DialogsContainer />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/music" element={<Music />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/users" element={<UsersContainer />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<HomePage />} />
+          </Routes>
+        </Suspense>
+        <SystemMessageWindowContainer />
+      </div>
+    </div>
+  );
+}
 
 const mapStateToProps = (state) => ({
   initialized: state.app.initialized
@@ -68,5 +67,6 @@ const SocialNetworkApp = (props) => {
     </Provider>
   </BrowserRouter>
 };
+
 
 export default SocialNetworkApp;

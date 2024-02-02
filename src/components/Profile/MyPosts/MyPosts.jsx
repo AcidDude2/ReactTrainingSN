@@ -11,7 +11,7 @@ const MyPosts = React.memo((props) => {
     props.addPost(values.newPostText);
   }
 
-  let postsElement = [...props.posts].reverse().map(p => <Post message={p.message} likes_counter={p.likesCount} />)
+  let postsElement = [...props.posts].reverse().map(p => <Post key={p.id} message={p.message} likes_counter={p.likesCount} />)
 
   return (
     <div className={styles.postsBlock}>

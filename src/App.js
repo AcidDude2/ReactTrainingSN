@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { Provider, connect } from "react-redux";
-import { initializeApp } from "./redux/app-reducer";
+import { initializeApp } from "./redux/app-reducer.ts";
 import GlobalPreloader from "./components/common/GlobalPreloader/GlobalPreloader";
 import { compose } from "redux";
 import { withRouter } from "./hoc/withRouter";
@@ -43,7 +43,7 @@ const App = (props) => {
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/users" element={<UsersContainer />} />
+            <Route path="/users" element={<UsersContainer pageTitle={"Самураи"}/>} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<HomePage />} />
           </Routes>

@@ -1,14 +1,14 @@
-import React from "react";
-import Sidebar from "./Sidebar";
-import { connect } from "react-redux";
+// import React from "react";
+// import Sidebar from "./Sidebar";
+// import { connect } from "react-redux";
 
-let mapStateToProps = (state) => {
-    return {
-        sidebar: state.sidebar
-    }
-}
+// let mapStateToProps = (state) => {
+//     return {
+//         sidebar: state.sidebar
+//     }
+// }
 
-let mapDispatchToProps = (dispatch) => {
-}
+// let mapDispatchToProps = (dispatch) => {
+// }
 
-export default connect (mapStateToProps, mapDispatchToProps)(Sidebar);
+// export default connect (mapStateToProps, mapDispatchToProps)(Sidebar);

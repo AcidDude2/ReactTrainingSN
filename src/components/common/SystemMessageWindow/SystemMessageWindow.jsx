@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../SystemMessageWindow/SystemMessageWindow.module.css";
 import { connect } from "react-redux";
-import { hideSystemMessage } from "../../../redux/profile-reducer";
+import { hideSystemMessage } from "../../../redux/profile-reducer.ts";
 
 
 const SystemMessageWindow = (props) => {

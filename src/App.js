@@ -8,7 +8,7 @@ import { initializeApp } from "./redux/app-reducer.ts";
 import GlobalPreloader from "./components/common/GlobalPreloader/GlobalPreloader";
 import { compose } from "redux";
 import { withRouter } from "./hoc/withRouter";
-import store from "./redux/redux-store";
+import store from "./redux/redux-store.ts";
 import Preloader from "./components/common/Preloader/Preloader";
 import SystemMessageWindowContainer from "./components/common/SystemMessageWindow/SystemMessageWindow";
 
@@ -18,8 +18,8 @@ const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileCo
 const News = React.lazy(() => import("./components/News/News"));
 const Music = React.lazy(() => import("./components/Music/Music"));
 const Settings = React.lazy(() => import("./components/Settings/Settings"));
-const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
-const Login = React.lazy(() => import("./components/Login/Login"));
+const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer.tsx"));
+const Login = React.lazy(() => import("./components/Login/Login.tsx"));
 const HomePage = React.lazy(() => import("./components/HomePage/HomePage"));
 
 

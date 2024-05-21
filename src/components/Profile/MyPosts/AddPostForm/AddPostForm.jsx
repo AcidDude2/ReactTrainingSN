@@ -1,7 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { required, maxLengthCreator } from "../../../utils/validators/validators";
-import { FormControl } from "../../../common/FormsControls/FormsControls";
+import { required, maxLengthCreator } from "../../../utils/validators/validators.ts";
+import { FormControl } from "../../../common/FormsControls/FormsControls.tsx";
 
 
 const maxLength10 = maxLengthCreator(10);

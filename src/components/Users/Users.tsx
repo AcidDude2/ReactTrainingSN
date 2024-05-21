@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import User from "./User/User";
-import Paginator from "../common/Paginator/Paginator";
+import Paginator from "../common/Paginator/Paginator.tsx";
 import { UserType } from "../../redux/types/types";
 
 

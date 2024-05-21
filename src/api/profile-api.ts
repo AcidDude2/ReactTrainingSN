@@ -1,17 +1,18 @@
-import { instance } from "./instance";
+import { ProfileType } from "../redux/types/types.ts";
+import { instance } from "./instance.ts";
 
 
 export const profileAPI = {
-    getProfile(userId) {
+    getProfile(userId: number) {
         return instance.get(`profile/` + userId);
     },
-    getStatus(userId) {
+    getStatus(userId: number) {
         return instance.get(`profile/status/` + userId);
     },
-    updateStatus(status) {
+    updateStatus(status: string) {
         return instance.put(`profile/status`, {status: status});
     },
-    savePhoto(photoFile) {
+    savePhoto(photoFile: any) {
         const formData = new FormData();
         formData.append("image", photoFile);
         return instance.put(`profile/photo`, formData, {
@@ -20,7 +21,7 @@ export const profileAPI = {
             }
         });
     },
-    saveProfile(profile) {
+    saveProfile(profile: ProfileType) {
         return instance.put(`profile`, profile);
     }
 };

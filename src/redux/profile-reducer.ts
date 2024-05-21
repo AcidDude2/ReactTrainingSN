@@ -1,6 +1,9 @@
-import { profileAPI } from "../api/profile-api";
+import { ThunkAction } from 'redux-thunk';
+import { profileAPI } from "../api/profile-api.ts";
 import { stopSubmit } from "redux-form";
-import { PostType, ProfileType, PhotosType } from "./types/types";
+import { PostType, ProfileType, PhotosType } from "./types/types.ts";
+import { Dispatch } from "redux";
+import { AppStateType } from "./redux-store.ts";
 
 
 const ADD_POST = "SN/profile-reducer/ADD_POST";
@@ -134,20 +137,24 @@ type formSystemMessageActionType = {
 
 export const formSystemMessage = (systemMessage: string): formSystemMessageActionType => ({ type: FORM_SYSTEM_MESSAGE, systemMessage });
 
+type ActionsTypes = AddPostActionCreatorActionType | SetUserProfileActionType | ToggleIsFetcjingActionType | SetStatusActionType | DeletePostActionType | SavePhotoSuccessActionType | SetSystemMessageWindowActiveActionType | formSystemMessageActionType;
+type DispatchType = Dispatch<ActionsTypes>;
+type GetStateType = () => AppStateType;
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
-export const getUserProfile = (userId: number) => async (dispatch: any) => {
+export const getUserProfile = (userId: number): ThunkType => async (dispatch: DispatchType, getState: GetStateType) => {
     let response = await profileAPI.getProfile(userId);
     dispatch(toggleIsFetching(true));
     dispatch(setUserProfile(response.data));
     dispatch(toggleIsFetching(false));
 };
 
-export const getStatus = (userId: number) => async (dispatch: any) => {
+export const getStatus = (userId: number): ThunkType => async (dispatch: DispatchType, getState: GetStateType) => {
     let response = await profileAPI.getStatus(userId)
     dispatch(setStatus(response.data));
 };
 
-export const updateStatus = (status: string) => async (dispatch: any) => {
+export const updateStatus = (status: string): ThunkType => async (dispatch: DispatchType, getState: GetStateType) => {
     try {
         let response = await profileAPI.updateStatus(status)
         if (response.data.resultCode === 0) {
@@ -159,14 +166,14 @@ export const updateStatus = (status: string) => async (dispatch: any) => {
     }
 };
 
-export const savePhoto = (file: any) => async (dispatch: any) => {
+export const savePhoto = (file: any):  ThunkType => async (dispatch: DispatchType, getState: GetStateType) => {
     let response = await profileAPI.savePhoto(file)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos));
     }
 };
 
-export const saveProfile = (profile: ProfileType) => async (dispatch: any, getState: any) => {
+export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch: DispatchType, getState: GetStateType) => {
     const userId = getState().auth.userId;
     const response = await profileAPI.saveProfile(profile);
 
@@ -181,12 +188,12 @@ export const saveProfile = (profile: ProfileType) => async (dispatch: any, getSt
     }
 };
 
-export const errorHandler = (errorResponse: number | null, hasError: boolean) => async(dispatch: any) => {
+export const errorHandler = (errorResponse: number | null, hasError: boolean): ThunkType => async(dispatch: DispatchType, getState: GetStateType) => {
     dispatch(identifySystemMessage(errorResponse));
     dispatch(setSystemMessageWindowActive(hasError));
 };
 
-export const identifySystemMessage = (errorCode: number | null) => async (dispatch: any) => {
+export const identifySystemMessage = (errorCode: number | null): ThunkType => async (dispatch: DispatchType, getState: GetStateType) => {
     if (errorCode === 500) {
         dispatch(formSystemMessage("Code 500: Internal server error"));
     }
@@ -198,7 +205,7 @@ export const identifySystemMessage = (errorCode: number | null) => async (dispat
     }
 };
 
-export const hideSystemMessage = () => async (dispatch: any) => {
+export const hideSystemMessage = (): ThunkType => async (dispatch: DispatchType, getState: GetStateType) => {
         dispatch(setSystemMessageWindowActive(false));
         dispatch(identifySystemMessage(null));
 };

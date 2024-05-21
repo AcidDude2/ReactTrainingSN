@@ -1,4 +1,4 @@
-import { instance } from "./instance";
+import { instance } from "./instance.ts";
 
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
@@ -7,10 +7,10 @@ export const usersAPI = {
                 return response.data;
             })
     },
-    follow(userId) {
+    follow(userId: number) {
         return instance.post(`follow/${userId}`)
     },
-    unfollow(userId) {
+    unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
     }
 }

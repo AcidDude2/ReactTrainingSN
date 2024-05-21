@@ -2,7 +2,7 @@ import React from "react";
 import Users from "./Users.tsx";
 import { connect } from "react-redux";
 import { follow, unfollow, requestUsers } from "../../redux/users-reducer.ts";
-import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../../redux/users-selectors.js";
+import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../../redux/users-selectors.ts";
 import Preloader from "../common/Preloader/Preloader.jsx";
 import { UserType } from "../../redux/types/types.ts";
 import { AppStateType } from "../../redux/redux-store.ts";

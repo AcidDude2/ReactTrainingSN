@@ -22,10 +22,7 @@ let initialState = {
     messages: [
         { id: 1, message: 'Hi there!'},
         { id: 2, message: 'How is your day?' },
-        { id: 3, message: 'Whatever, dude' },
-        { id: 4, message: 'Hi there!' },
-        { id: 5, message: 'How is your day?' },
-        { id: 6, message: 'Whatever, dude' }
+        { id: 3, message: 'Whatever, dude' }
     ] as Array<MessageType>,
 };
 
@@ -37,7 +34,7 @@ const dialogReducer = (state: InitialStateType = initialState, action: any): Ini
             let body = action.newMessageBody;
            return { 
             ...state,
-            messages: [...state.messages, { id: 7, message: body }]
+            messages: [...state.messages, { id: 4, message: body }]
            }
         }
         default:

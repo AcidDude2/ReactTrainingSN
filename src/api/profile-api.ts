@@ -1,27 +1,35 @@
-import { ProfileType } from "../redux/types/types.ts";
-import { instance } from "./instance.ts";
+import { PhotosType, ProfileType } from "../types/types";
+import { APIResponseType, instance } from "./instance.ts";
 
+type SavePhotoResponseDataType = {
+    photos: PhotosType
+}
 
 export const profileAPI = {
-    getProfile(userId: number) {
-        return instance.get(`profile/` + userId);
+    async getProfile(userId: number) {
+        const res = await instance.get<ProfileType>(`profile/` + userId);
+        return res.data;
     },
-    getStatus(userId: number) {
-        return instance.get(`profile/status/` + userId);
+    async getStatus(userId: number) {
+        const res = await instance.get<string>(`profile/status/` + userId);
+        return res.data;
     },
-    updateStatus(status: string) {
-        return instance.put(`profile/status`, {status: status});
+    async updateStatus(status: string) {
+        const res = await instance.put<APIResponseType>(`profile/status`, { status: status });
+        return res.data;
     },
-    savePhoto(photoFile: any) {
+    async savePhoto(photoFile: any) {
         const formData = new FormData();
         formData.append("image", photoFile);
-        return instance.put(`profile/photo`, formData, {
+        const res = await instance.put<APIResponseType<SavePhotoResponseDataType>>(`profile/photo`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
         });
+        return res.data;
     },
-    saveProfile(profile: ProfileType) {
-        return instance.put(`profile`, profile);
+    async saveProfile(profile: ProfileType) {
+        const res = await instance.put(`profile`, profile);
+        return res.data;
     }
 };

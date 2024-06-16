@@ -1,38 +1,28 @@
-import { instance } from "./instance.ts";
+import { instance, ResultCodesEnum, ResultCodeForCaptchaEnum, APIResponseType } from "./instance.ts";
 
 
-export enum ResultCodes {
-    Success = 0,
-    Error = 1
+type AuthorizeMeResponseDataType = {
+    id: number
+    email: string
+    login: string
 }
 
-export enum ResultCodeForCaptcha {
-    CaptchaIsRequired = 10
-}
-
-type AuthorizeMeResponseType = {
-    data: {id: number, email: string, login: string}
-    resultCode: ResultCodes
-    messages: Array<string>
-}
-
-type LoginResponseType = {
-    data: {userId: number}
-    resultCode: ResultCodes | ResultCodeForCaptcha
-    messages: Array<string>
+type LoginResponseDataType = {
+    userId: number
 }
 
 export const authAPI = {
-    authorizeMe() {
-        return instance.get<AuthorizeMeResponseType>(`auth/me`).then(res => res.data);
+    async authorizeMe() {
+        const res = await instance.get<APIResponseType<AuthorizeMeResponseDataType>>(`auth/me`);
+        return res.data;
     },
 
     async login(email: string, password: string, rememberMe = false, captcha: string | null = null) {
-        const res = await instance.post<LoginResponseType>(`auth/login`, { email, password, rememberMe, captcha });
+        const res = await instance.post<APIResponseType<LoginResponseDataType, ResultCodesEnum | ResultCodeForCaptchaEnum>>(`auth/login`, { email, password, rememberMe, captcha });
         return res.data;
     },
 
     logout() {
-        return instance.delete(`auth/login`)
+        return instance.delete(`auth/login`);
     }
 }

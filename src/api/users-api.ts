@@ -1,16 +1,16 @@
-import { instance } from "./instance.ts";
+import { APIResponseType, GetItemsType, instance } from "./instance.ts";
+
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => {
-                return response.data;
-            })
+    async getUsers(currentPage = 1, pageSize = 10) {
+        const res = await instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}`);
+        return res.data;
     },
-    follow(userId: number) {
-        return instance.post(`follow/${userId}`)
+    async follow(userId: number) {
+        const res = await instance.post<APIResponseType>(`follow/${userId}`);
+        return res.data;
     },
-    unfollow(userId: number) {
-        return instance.delete(`follow/${userId}`)
+    async unfollow(userId: number) {
+        return instance.delete(`follow/${userId}`).then(res => res.data) as Promise<APIResponseType>
     }
-}
+};

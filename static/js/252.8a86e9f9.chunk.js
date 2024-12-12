@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmy_app=self.webpackChunkmy_app||[]).push([[252],{6252:(e,p,r)=>{r.r(p),r.d(p,{default:()=>a});r(5043);var s=r(579);const a=e=>(0,s.jsx)("div",{children:" Error 404 not found "})}}]);
+//# sourceMappingURL=252.8a86e9f9.chunk.js.map

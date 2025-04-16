@@ -1,6 +1,7 @@
 import { getAuthUserData } from "./auth-reducer.ts";
 import { InferActionsType } from "./redux-store.ts";
 
+
 let initialState = {
     initialized: false as boolean
 };
@@ -19,7 +20,7 @@ const appReducer = (state: InitialStateType = initialState, action: ActionsType)
 
 const actions = {
     initialisationSuccess: () => ({ type: "SN/APP-REDUCER/INITIALIZATION_SUCCESS" } as const)
-}
+};
 
 export const initializeApp = () => (dispatch: any) => {
     let promise = dispatch(getAuthUserData())

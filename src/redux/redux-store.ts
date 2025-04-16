@@ -1,15 +1,15 @@
-import {Action, applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux"
+import { Action, applyMiddleware, combineReducers, legacy_createStore as createStore, UnknownAction, Store, compose, Reducer } from "redux"
 import dialogReducer from "./dialog-reducer.ts";
 import profileReducer from "./profile-reducer.ts";
 import usersReducer from "./users-reducer.ts";
 import authReducer from "./auth-reducer.ts";
 import appReducer from "./app-reducer.ts";
-import thunkMiddleware from "redux-thunk";
+import { thunk } from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
-import { compose } from "redux";
-import { ThunkAction } from "redux-thunk";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 
-let rootReducer = combineReducers({
+
+let rootReducer: Reducer<any, UnknownAction> = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogReducer,
     usersPage: usersReducer,
@@ -18,17 +18,18 @@ let rootReducer = combineReducers({
     app: appReducer
 });
 
-type RootReducerType = typeof rootReducer;
-export type AppStateType = ReturnType<RootReducerType>;
+export type AppStateType = ReturnType<typeof rootReducer>;
 
-type PropertiesTypes<T> = T extends {[key: string]: infer U} ? U : never;
-export type InferActionsType<T extends {[key: string]: (...args: any[]) => any}> = ReturnType<PropertiesTypes<T>>;
+export type InferActionsType<T> = T extends { [key: string]: (...args: any[]) => infer U } ? U : never;
 
 export type BaseThunkType<AT extends Action = Action, R = void> = ThunkAction<Promise<R>, AppStateType, unknown, AT>;
 
+export type AppDispatchType = ThunkDispatch<AppStateType, unknown, any>;
+
 //@ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
+
+const store: Store<AppStateType> = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 // @ts-ignore
 window.__store__ = store
 

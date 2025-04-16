@@ -7,9 +7,10 @@ export type PostType = {
 export type ProfileType = {
   fullName: string
   lookingForAJob: boolean
-  lookingForAJobdescription: string
+  lookingForAJobDescription: string
   photos: PhotosType
   contacts: ContactsType
+  aboutMe: string
 };
 
 export type ContactsType = {
@@ -29,8 +30,9 @@ export type PhotosType = {
 };
 
 export type UserType = {
-  id: string
+  id: number
   name: string
   status: string
   photos: PhotosType
+  followed: boolean
 };

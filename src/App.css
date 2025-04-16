@@ -38,7 +38,7 @@
 }
 
 .app-wrapper {
-  margin: auto;
+  margin-left: 350px;
   display: grid;
   width: 1200px;
   grid-template-areas:

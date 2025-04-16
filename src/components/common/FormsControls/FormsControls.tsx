@@ -6,12 +6,14 @@ import { FieldValiatorType } from "../../utils/validators/validators.ts";
 type FormControlPropsType = {
     name: string
     child: "input" | "textarea" | "select"
-    placeholder: string| undefined
+    placeholder: string | undefined
     validators: Array<FieldValiatorType>
     type?: string
     text?: string
     value?: string
-}
+};
+
+export type GetStringKeys<T> = Extract<keyof T, string>;
 
 export const FormControl: React.FC<FormControlPropsType & WrappedFieldProps> = ({ input, meta, ...restProps }) => {
     const hasError = meta.touched && meta.error;
@@ -23,11 +25,11 @@ export const FormControl: React.FC<FormControlPropsType & WrappedFieldProps> = (
             {hasError && <span>{meta.error}</span>}
         </div>
     )
-}
+};
 
 export function createField<FormKeysType extends string> (name: FormKeysType, child: "input" | "textarea" | "select", component: React.FC<FormControlPropsType & WrappedFieldProps>, placeholder: string| undefined, validators: Array<FieldValiatorType>, type?: string, text?: string, value?: string, props={}) {
     return (
     <div>
         {text}<Field name={name} child={child} component={component} placeholder={placeholder} validate={validators} type={type} value={value} {...props}/>
     </div>)
-}
+};

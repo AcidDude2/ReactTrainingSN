@@ -12,7 +12,7 @@ type PropsType = {
     portionSize?: number
 }
 
-const Paginator: FC<PropsType> = ({totalItemsCount, onPageChanged, currentPage, pageSize, portionSize = 10}) => {
+const Paginator: FC<PropsType> = ({totalItemsCount, onPageChanged = () => {}, currentPage, pageSize, portionSize = 10}) => {
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
 
     let pages: Array<number> = [];
@@ -37,7 +37,7 @@ const Paginator: FC<PropsType> = ({totalItemsCount, onPageChanged, currentPage, 
                     [styles.selectedPage]: currentPage === p
                 }, styles.pageNumber)}
                 key={p}
-                    onClick={(e) => { onPageChanged(p) }}>{p}</span>
+                    onClick={() => { onPageChanged(p) }}>{p}</span>
             })}
              {portionCount > portionNumber && <button onClick={() => {setPortionNumber(portionNumber + 1)}}>NEXT</button>}
         </div>)
